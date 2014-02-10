@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dblpmobile.app" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.dblpmobile.app.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.dblpmobile.app.ActivitySplashTwo"
+            android:label="@string/title_activity_activity_splash_two" >
+        </activity>
+        <activity
+            android:name="com.dblpmobile.app.MainDirectory"
+            android:label="@string/title_activity_main_directory" >
+        </activity>
+        <activity
+            android:name="com.dblpmobile.app.ActivityWebView"
+            android:label="@string/title_activity_activity_web_view" >
+        </activity>
+        <activity
+            android:name="com.dblpmobile.app.ActivityAuthorList"
+            android:label="@string/title_activity_activity_author_list" >
+        </activity>
+        <activity
+            android:name="com.dblpmobile.app.ActivityArticleList"
+            android:label="@string/title_activity_activity_article_list" >
+        </activity>
+        <activity
+            android:name="com.dblpmobile.app.ActivityLetterList"
+            android:label="@string/title_activity_activity_letter_list" >
+        </activity>
+        <activity
+            android:name="com.dblpmobile.app.ActivityConferences"
+            android:label="@string/title_activity_activity_conferences" >
+        </activity>
+        <activity
+            android:name="com.dblpmobile.app.ActivityJournals"
+            android:label="@string/title_activity_activity_journals" >
+        </activity>
+        <activity
+            android:name="com.dblpmobile.app.ActivityLinks"
+            android:label="@string/title_activity_activity_links" >
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

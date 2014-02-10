@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:weightSum="1"
+    android:background="@drawable/grey_rounded_corners">>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Question"
+        android:id="@+id/dialogQuestionTextView"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/grey_rounded_corners" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:id="@+id/scrollViewFAQ"
+        android:layout_gravity="center_horizontal" >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Answer"
+        android:id="@+id/dialogAnswerTextView"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff"
+        android:background="@drawable/grey_rounded_corners" />
+    </ScrollView>
+
+
+    <Button
+        android:layout_width="334dp"
+        android:layout_height="50dp"
+        android:id="@+id/dialogAnswerButton"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/dark_grey_rounded_corners"
+        android:text="Ok"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.03"
+        android:scaleType="fitCenter" />
+
+</LinearLayout>

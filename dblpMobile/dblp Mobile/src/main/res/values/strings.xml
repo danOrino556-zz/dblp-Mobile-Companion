@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">dblp Mobile</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_activity_splash_two">ActivitySplashTwo</string>
+    <string name="title_activity_main_directory">MainDirectory</string>
+    <string name="title_activity_activity_web_view">ActivityWebView</string>
+    <string name="title_activity_description">DescriptionActivity</string>
+    <string name="title_activity_activity_author_list">ActivityAuthorList</string>
+    <string name="title_activity_activity_article_list">ActivityArticleList</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_activity_letter_list">ActivityLetterList</string>
+    <string name="title_activity_activity_conferences">ActivityConferences</string>
+    <string name="title_activity_activity_journals">ActivityJournals</string>
+    <string name="title_activity_activity_links">ActivityLinks</string>
+
+</resources>

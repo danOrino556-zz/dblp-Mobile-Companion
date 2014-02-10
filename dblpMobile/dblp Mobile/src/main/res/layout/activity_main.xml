@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dblpmobile.app.MainActivity"
+    android:background="#ffffff"
+    tools:ignore="MergeRootFrame" >
+
+
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="center"
+        android:src="@drawable/lebowski"
+        android:scaleType="fitCenter"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Urban Achievers"
+        android:id="@+id/textView"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="#000000"
+        android:textColor="#ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:textSize="60dp"
+        android:typeface="serif" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Software Development"
+        android:id="@+id/textView2"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#ffffff"
+        android:background="#000000"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:typeface="serif"
+        android:textSize="40dp" />
+</RelativeLayout>

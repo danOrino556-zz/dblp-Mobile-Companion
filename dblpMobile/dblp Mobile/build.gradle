@@ -1,0 +1,26 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.0"
+
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 15
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:+'
+    compile files('/Users/danielrobertson/AndroidStudioProjects/dblpMobile/libs/xerces.jar')
+    compile files('/Users/danielrobertson/AndroidStudioProjects/dblpMobile/libs/mf.jar')
+    compile files('/Users/danielrobertson/AndroidStudioProjects/dblpMobile/libs/jsoup-1.7.3.jar')
+}

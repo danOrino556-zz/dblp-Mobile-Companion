@@ -1,0 +1,131 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dblpmobile.app.ActivityLetterList"
+    tools:ignore="MergeRootFrame"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:id="@+id/menuBar"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:id="@+id/dblplogo"
+            android:src="@drawable/dblp_no_title"
+            android:scaleType="fitStart"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:cropToPadding="false"
+            android:padding="15dp" />
+
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/infoButton"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@android:drawable/ic_menu_info_details"
+            android:background="#505b62" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/settingsButton"
+            android:layout_toLeftOf="@+id/infoButton"
+            android:src="@android:drawable/ic_menu_preferences"
+            android:background="#505b62" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/backButtonDirectory"
+            android:layout_toLeftOf="@+id/settingsButton"
+            android:src="@drawable/abc_ic_ab_back_holo_dark"
+            android:background="#505b62" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/menuBar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Search"
+            android:id="@+id/conferenceTextView"
+            android:textColor="#ffffff"
+
+            android:background="#505b62"
+            android:gravity="center_horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:id="@+id/yellowLayout"
+            android:background="#ffd500"
+            android:layout_below="@id/conferenceTextView"
+            android:layout_marginBottom="0dp"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/conferenceListView"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/yellowLayoutBottom"
+            android:fastScrollAlwaysVisible="false"
+            android:fastScrollEnabled="false"
+            android:layout_below="@id/yellowLayout"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:id="@+id/yellowLayoutBottom"
+            android:background="#ffd500"
+            android:layout_above="@+id/matchesFoundTextView"
+            android:layout_marginBottom="0dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0 Matches Found"
+            android:id="@+id/matchesFoundTextView"
+            android:textColor="#ffffff"
+            android:background="#505b62"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/dblp Mobile/dblp Mobile.iml" filepath="$PROJECT_DIR$/dblp Mobile/dblp Mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dblpMobile.iml" filepath="$PROJECT_DIR$/dblpMobile.iml" />
+    </modules>
+  </component>
+</project>
+
