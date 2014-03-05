@@ -100,8 +100,27 @@ public class ArticleArrayAdapter extends ArrayAdapter <Article>
                 context.startActivity(x);
             }
         });
+        viewDocumentButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Redirect to the url that contains " + values.get(i).getTitle(), "Help");
+                return false;
+            }
+        });
 
         ImageButton exportDocumentButton = (ImageButton)rowView.findViewById(R.id.articleExportDocumentImageButton2);
+        exportDocumentButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Export " + values.get(i).getTitle() +
+                        " in MLA, APA, or XML format", "Help");
+                return false;
+            }
+        });
         exportDocumentButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -130,23 +149,17 @@ public class ArticleArrayAdapter extends ArrayAdapter <Article>
                 Button sendEmailButton = (Button)exportDocumentDialog.findViewById(R.id.exportDocumentSendButton);
                 sendEmailButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view)
-                    {
+                    public void onClick(View view) {
                         String Citation;
                         String Reference;
 
-                        if(exportFormatSpinner.getSelectedItemPosition() == 0)
-                        {
+                        if (exportFormatSpinner.getSelectedItemPosition() == 0) {
                             Citation = CitationCreator.apaCitation(values.get(position));
                             Reference = ReferenceCreator.apaReference(values.get(position));
-                        }
-                        else if(exportFormatSpinner.getSelectedItemPosition() == 1)
-                        {
+                        } else if (exportFormatSpinner.getSelectedItemPosition() == 1) {
                             Citation = "XML";
                             Reference = ReferenceCreator.xmlReference(values.get(position));
-                        }
-                        else
-                        {
+                        } else {
                             Citation = CitationCreator.mlaCitation(values.get(position));
                             Reference = ReferenceCreator.mlaReference(values.get(position));
                         }
@@ -154,16 +167,13 @@ public class ArticleArrayAdapter extends ArrayAdapter <Article>
                         String recAddress = emailAddress.getText().toString();
                         Intent i = new Intent(Intent.ACTION_SEND);
                         i.setType("message/rfc822");
-                        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{recAddress});
+                        i.putExtra(Intent.EXTRA_EMAIL, new String[]{recAddress});
                         i.putExtra(Intent.EXTRA_SUBJECT, "Citation for : " + values.get(position).getTitle());
-                        i.putExtra(Intent.EXTRA_TEXT   , "Citation : \n\n" + Citation +
+                        i.putExtra(Intent.EXTRA_TEXT, "Citation : \n\n" + Citation +
                                 "\n\nReference : \n\n" + Reference);
-                        try
-                        {
+                        try {
                             context.startActivity(Intent.createChooser(i, "Send mail..."));
-                        }
-                        catch (android.content.ActivityNotFoundException ex)
-                        {
+                        } catch (android.content.ActivityNotFoundException ex) {
                             Toast.makeText(context, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
                         }
                         exportDocumentDialog.dismiss();
@@ -171,11 +181,22 @@ public class ArticleArrayAdapter extends ArrayAdapter <Article>
                 });
 
                 exportDocumentDialog.show();
-
             }
         });
 
+
+
         ImageButton shareDocumentButton = (ImageButton)rowView.findViewById(R.id.articleShareDocumentImageButton3);
+        shareDocumentButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Share details for " + values.get(i).getTitle() +
+                                                            " via email or Google Drive", "Help");
+                return false;
+            }
+        });
         shareDocumentButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -215,8 +236,6 @@ public class ArticleArrayAdapter extends ArrayAdapter <Article>
                 });
 
                 emailDocumentDialog.show();
-
-
             }
         });
 
@@ -230,6 +249,15 @@ public class ArticleArrayAdapter extends ArrayAdapter <Article>
                 extras.putString("URL", "http://scholar.google.com/scholar?q=" + values.get(i).getTitle());
                 j.putExtras(extras);
                 context.startActivity(j);
+            }
+        });
+        askOthersButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Search for " + values.get(i).getTitle()+ " in Google Scholar", "Help");
+                return false;
             }
         });
 
@@ -264,6 +292,65 @@ public class ArticleArrayAdapter extends ArrayAdapter <Article>
             }
         });
 
+        articleInformationButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("View all details for " + values.get(i).getTitle(), "Help");
+                return false;
+            }
+        });
+
+        ImageButton saveArticleButton = (ImageButton)rowView.findViewById(R.id.articleSaveImageButton5);
+        saveArticleButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Save " + values.get(i).getTitle()+ " in a folder of your choosing", "Help");
+                return false;
+            }
+        });
+        saveArticleButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+
+            }
+        });
+
+
         return rowView;
+    }
+
+    public void callAnswerDialog (final String answer, final String question)
+    {
+        final Dialog answerSearchDialog = new Dialog(context);
+
+        answerSearchDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        Window dialogWindow = answerSearchDialog.getWindow();
+        dialogWindow.setBackgroundDrawableResource(R.drawable.grey_rounded_corners);
+
+        answerSearchDialog.setContentView(R.layout.dialog_faq_answer);
+        answerSearchDialog.setTitle(question);
+
+        final TextView questionTitle = (TextView)answerSearchDialog.findViewById(R.id.dialogQuestionTextView);
+        questionTitle.setText(question);
+
+        final TextView answerSearchTextField = (TextView)answerSearchDialog.findViewById(R.id.dialogAnswerTextView);
+        answerSearchTextField.setText(answer.toString());
+
+        final Button answerCloseButton = (Button)answerSearchDialog.findViewById(R.id.dialogAnswerButton);
+        answerCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                answerSearchDialog.dismiss();
+            }
+        });
+        answerSearchDialog.show();
     }
 }

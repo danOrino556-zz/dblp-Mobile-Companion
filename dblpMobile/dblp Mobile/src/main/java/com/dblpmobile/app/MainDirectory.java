@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -68,6 +69,15 @@ public class MainDirectory extends ActionBarActivity
                     searchCollapsed = false;
                 }
 
+            }
+        });
+        collapseSearchButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Collapse all the author search buttons", "Help");
+                return false;
             }
         });
 
@@ -128,10 +138,18 @@ public class MainDirectory extends ActionBarActivity
                 {
                     Toast.makeText(getApplicationContext(), "Error initializing speech to text engine.", Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
+        micSearchButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Conduct a standard author search via voice", "Help");
+                return false;
+            }
+        });
+
 
         final Button facetedSearchButton = (Button)findViewById(R.id.facetedSearchButton);
         facetedSearchButton.setOnClickListener(new View.OnClickListener() {
@@ -180,6 +198,15 @@ public class MainDirectory extends ActionBarActivity
                     bibliographiesCollapsed = false;
                 }
 
+            }
+        });
+        collapseBiblographiesButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Collapse all the bibliography search buttons", "Help");
+                return false;
             }
         });
 
@@ -266,6 +293,15 @@ public class MainDirectory extends ActionBarActivity
 
         final RelativeLayout mydblpLayout = (RelativeLayout)findViewById(R.id.myDPLPMainLayout);
         final ImageButton collapsemydblpButton = (ImageButton)findViewById(R.id.collapsemyDBLPButton);
+        collapsemydblpButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Collapse the mydblp log in button", "Help");
+                return false;
+            }
+        });
+
         collapsemydblpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -307,6 +343,15 @@ public class MainDirectory extends ActionBarActivity
 
         final RelativeLayout linksLayout = (RelativeLayout)findViewById(R.id.linksMainLayout);
         final ImageButton collapseLinksButton = (ImageButton)findViewById(R.id.collapseLinksButton);
+        collapseLinksButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Collapse the FAQ and Links buttons", "Help");
+                return false;
+            }
+        });
         collapseLinksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -363,6 +408,15 @@ public class MainDirectory extends ActionBarActivity
         });
 
         ImageButton expandAllButton = (ImageButton)findViewById(R.id.expanAllButton);
+        expandAllButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+
+                return false;
+            }
+        });
         expandAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -442,5 +496,34 @@ public class MainDirectory extends ActionBarActivity
             startActivity(i);
             overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
         }
+    }
+
+    public void callAnswerDialog (final String answer, final String question)
+    {
+        final Dialog answerSearchDialog = new Dialog(this);
+
+        answerSearchDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        Window dialogWindow = answerSearchDialog.getWindow();
+        dialogWindow.setBackgroundDrawableResource(R.drawable.grey_rounded_corners);
+
+        answerSearchDialog.setContentView(R.layout.dialog_faq_answer);
+        answerSearchDialog.setTitle(question);
+
+        final TextView questionTitle = (TextView)answerSearchDialog.findViewById(R.id.dialogQuestionTextView);
+        questionTitle.setText(question);
+
+        final TextView answerSearchTextField = (TextView)answerSearchDialog.findViewById(R.id.dialogAnswerTextView);
+        answerSearchTextField.setText(answer.toString());
+
+        final Button answerCloseButton = (Button)answerSearchDialog.findViewById(R.id.dialogAnswerButton);
+        answerCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                answerSearchDialog.dismiss();
+            }
+        });
+        answerSearchDialog.show();
     }
 }

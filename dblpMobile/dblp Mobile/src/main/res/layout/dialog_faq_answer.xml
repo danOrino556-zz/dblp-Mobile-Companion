@@ -18,12 +18,12 @@
         android:id="@+id/dialogQuestionTextView"
         android:layout_gravity="center_horizontal"
         android:textColor="#ffffff"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/grey_rounded_corners" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="200dp"
         android:id="@+id/scrollViewFAQ"
         android:layout_gravity="center_horizontal" >
     <TextView
@@ -46,7 +46,7 @@
         android:background="@drawable/dark_grey_rounded_corners"
         android:text="Ok"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_weight="0.03"
         android:scaleType="fitCenter" />
 

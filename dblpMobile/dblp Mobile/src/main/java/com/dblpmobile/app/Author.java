@@ -9,7 +9,6 @@ public class Author
     private String urlpt = "dummy field";
     public Author()
     {
-
     }
 
     public Author (String incomingName, String incomingURL)

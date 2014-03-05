@@ -208,7 +208,6 @@ public class ActivityLinks extends ActionBarActivity
             }
         });
         answerSearchDialog.show();
-
     }
 
     private class AsyncLinksLoader extends AsyncTask<Void, Void, Void>

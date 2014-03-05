@@ -37,14 +37,12 @@ public class ArticleSaxParser
                 loadingProgress.incrementProgressBy(1);
             }
 
-            // get the `Employee list`
             menu = saxHandler.getmenu();
 
         } catch (Exception ex) {
             Log.d("XML", "SAXXMLParser: parse() failed");
         }
 
-        // return Employee list
         return menu;
     }
 }

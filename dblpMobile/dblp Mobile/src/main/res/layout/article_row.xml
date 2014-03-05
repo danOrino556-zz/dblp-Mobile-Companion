@@ -154,6 +154,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/articleInformationImageButton5"
                 android:src="@android:drawable/ic_menu_info_details"
+                android:background="@drawable/grey_rounded_corners"
+                android:layout_marginRight="30dp"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/articleSaveImageButton5"
+                android:src="@android:drawable/ic_menu_add"
                 android:background="@drawable/grey_rounded_corners" />
         </LinearLayout>
     </RelativeLayout>

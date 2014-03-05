@@ -32,14 +32,19 @@ public class ActivityArticleList extends ActionBarActivity
 {
     Context context = this;
 
+    //The entry activity used determines which of these is actually used
     ArrayList <Article> articles = new ArrayList<Article>();
     ArrayList <Author> authors = new ArrayList<Author>();
+
+    //Each of these variables are passed in from the previous activity
     String urlSearched;
     String authorSearched;
 
     //Every publication parsed will increment this variable by 1
     Integer numberOfEntries = 0;
 
+    //These booleans act as a series of switches which dictate which
+    //async parser process is called
     boolean isBibliography = false;
     boolean articlesUpdated = false;
     boolean isJournal = false;
@@ -60,8 +65,14 @@ public class ActivityArticleList extends ActionBarActivity
     String[] spinnerOptions = {"Sort By Year - Descending", "Sort By Year - Ascending",
                                "Sort By Type Z to A", "Sort By Type A to Z",
                                "Sort By Title Z to A", "Sort By Title A to Z"};
+
+    //The coauthors button is only shown during author search
     Button toggleCoAuthorsButton;
+
+    //Six different sorts / defined at the end of this activity
     Spinner articleSortSpinner;
+
+    //These two buttons perform the actions on the entire displayed list
     ImageButton exportAllArticlesButton;
     ImageButton shareAllArticlesButton;
 
@@ -69,11 +80,11 @@ public class ActivityArticleList extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         setContentView(R.layout.activity_article_list);
 
+        //Now we will go through and set the booleans that are defined at the start of this activity
+        //These booleans will define which async loader we use
         Bundle articleWanted= getIntent().getExtras();
         if (getIntent().hasExtra("urlSearched"))
         {
@@ -116,7 +127,18 @@ public class ActivityArticleList extends ActionBarActivity
         });
 
         exportAllArticlesButton = (ImageButton)findViewById(R.id.exportArticlesButton);
-        exportAllArticlesButton.setOnClickListener(new View.OnClickListener() {
+        exportAllArticlesButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Export all displayed articles to MLA, APA, or XML", "Help");
+                return false;
+            }
+        });
+
+        exportAllArticlesButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -211,6 +233,16 @@ public class ActivityArticleList extends ActionBarActivity
         });
 
         shareAllArticlesButton = (ImageButton)findViewById(R.id.shareArticlesButton);
+        shareAllArticlesButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Share details for displayed articles via Google Drive or email", "Help");
+                return false;
+            }
+        });
+
         shareAllArticlesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -263,14 +295,22 @@ public class ActivityArticleList extends ActionBarActivity
             }
         });
 
+        //Journals usually display a journal page and then a volume page. If it is the first journal search
+        //we need to display volumes instead of individual entries
         if (isFirstJournalSearch)
         {
             new AsyncJournalLoader().execute();
         }
+
+        //Series are parsed in HTML differently than the other bibliography types
+        //So if it is a series, we will have to use a special async loader
         else if(isSecondSeries)
         {
             new AsyncSeriesLoader().execute();
         }
+
+        //All feeder activities that are ready to display individual entries
+        //uses this loader
         else
         {
             new AsyncArticleLoader().execute();
@@ -308,16 +348,45 @@ public class ActivityArticleList extends ActionBarActivity
             }
         });
 
+        //This coauthor list will only be shown when coming from author search
         authorList = (ListView)findViewById(R.id.authorListView);
+        authorList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                String urlSelected = authors.get(i).getUrlpt();
+                Intent x = new Intent(ActivityArticleList.this, ActivityArticleList.class);
+                Bundle extras = new Bundle();
+                extras.putString("urlSearched", urlSelected);
+                extras.putString("authorSearched", authors.get(i).getName());
+                x.putExtras(extras);
+                startActivity(x);
+                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+
+            }
+        });
         authorList.setVisibility(View.GONE);
 
+        //Sort the articles 6 different ways
         articleSortSpinner = (Spinner)findViewById(R.id.sortArticlespinner);
         ArrayAdapter adapter = new ArrayAdapter(context,R.layout.sorting_spinner_text, spinnerOptions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         articleSortSpinner.setAdapter(adapter);
         articleSortSpinner.setMinimumHeight(30);
 
+        //This is only shown if coming from author search
         toggleCoAuthorsButton = (Button)findViewById(R.id.toggleCoAuthorsButton);
+        toggleCoAuthorsButton.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                callAnswerDialog("Toggles the list view between articles and coauthors", "Help");
+                return false;
+            }
+        });
+
         toggleCoAuthorsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -385,7 +454,6 @@ public class ActivityArticleList extends ActionBarActivity
 
             //this method will be running on UI thread
             loadingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
             Window dialogWindow = loadingDialog.getWindow();
             dialogWindow.setBackgroundDrawableResource(R.drawable.white_rounded_corners);
             loadingDialog.setContentView(R.layout.daialog_loading_screen);
@@ -401,7 +469,8 @@ public class ActivityArticleList extends ActionBarActivity
                 articles.clear();
                 numberOfEntries = 0;
 
-                // Connect to the web site
+                // Connect to the dblp site and parse by HTML tag
+
                 Document document = Jsoup.connect(urlSearched).get();
                 ArrayList <String> keys = new ArrayList<String>();
 
@@ -416,11 +485,22 @@ public class ActivityArticleList extends ActionBarActivity
                     numberOfEntries++;
                 }
 
-                //CoAuthorIndex
+                //CoAuthorIndex only if coming from author search. The following logic wont
+                //parse any tags if it is not coming from author
                 Elements coAuthorKeys = document.select("div.person > a");
                 for (Element authorKey : coAuthorKeys)
                 {
-                    Author newAuthor = new Author(authorKey.text(), authorKey.attr("href"));
+                    StringBuilder moddedURL = new StringBuilder();
+                    moddedURL.append("http://dblp.uni-trier.de/pers/hd");
+
+
+                    String oldURL = authorKey.attr("href");
+                    String newURL = oldURL.substring(2);
+
+                    moddedURL.append(newURL);
+                    moddedURL.append(".html");
+
+                    Author newAuthor = new Author(authorKey.text(), moddedURL.toString());
                     authors.add(newAuthor);
                 }
 
@@ -439,6 +519,8 @@ public class ActivityArticleList extends ActionBarActivity
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
+            //At this point, the loading dialog is still showing and all data has been parsed
+            //from the site. Now we set a lot of variables
             if (articlesUpdated && isFirstJournalSearch)
             {
                 ArticleArrayAdapterJournals adapter = new ArticleArrayAdapterJournals(context, articles);
@@ -462,8 +544,7 @@ public class ActivityArticleList extends ActionBarActivity
                 articleList.setAdapter(adapter);
             }
 
-
-
+            //This simply displays "match" or "matches" depending on plural or singular results
             if (numberOfEntries == 1)
             {
                 TextView matchesFoundTextView = (TextView)findViewById(R.id.matchesFoundTextView);
@@ -475,11 +556,12 @@ public class ActivityArticleList extends ActionBarActivity
                 matchesFoundTextView.setText(numberOfEntries + " Matches Found");
             }
 
+
+            //The following sets are independent of data parsed
             AuthorArrayAdapter adapter = new AuthorArrayAdapter(context, authors);
             authorList.setAdapter(adapter);
-
-
-            articleSortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            articleSortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+            {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
                 {
@@ -608,6 +690,8 @@ public class ActivityArticleList extends ActionBarActivity
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
+            //At this point, the loading dialog is still showing and all data has been parsed
+            //from the site. Now we set a lot of variables
             if (articlesUpdated && isFirstJournalSearch)
             {
                 ArticleArrayAdapterJournals adapter = new ArticleArrayAdapterJournals(context, articles);
@@ -721,6 +805,8 @@ public class ActivityArticleList extends ActionBarActivity
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
+            //At this point, the loading dialog is still showing and all data has been parsed
+            //from the site. Now we set a lot of variables
             if (articlesUpdated && isFirstJournalSearch)
             {
                 ArticleArrayAdapterJournals adapter = new ArticleArrayAdapterJournals(context, articles);
@@ -917,4 +1003,35 @@ public class ActivityArticleList extends ActionBarActivity
         }
         adapter.notifyDataSetChanged();
     }
+
+    public void callAnswerDialog (final String answer, final String question)
+    {
+        final Dialog answerSearchDialog = new Dialog(this);
+
+        answerSearchDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        Window dialogWindow = answerSearchDialog.getWindow();
+        dialogWindow.setBackgroundDrawableResource(R.drawable.grey_rounded_corners);
+
+        answerSearchDialog.setContentView(R.layout.dialog_faq_answer);
+        answerSearchDialog.setTitle(question);
+
+        final TextView questionTitle = (TextView)answerSearchDialog.findViewById(R.id.dialogQuestionTextView);
+        questionTitle.setText(question);
+
+        final TextView answerSearchTextField = (TextView)answerSearchDialog.findViewById(R.id.dialogAnswerTextView);
+        answerSearchTextField.setText(answer.toString());
+
+        final Button answerCloseButton = (Button)answerSearchDialog.findViewById(R.id.dialogAnswerButton);
+        answerCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                answerSearchDialog.dismiss();
+            }
+        });
+        answerSearchDialog.show();
+    }
 }
+
+

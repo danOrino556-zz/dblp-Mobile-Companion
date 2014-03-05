@@ -31,14 +31,13 @@ public class ArticleSaxHandler extends DefaultHandler
         tempVal = "";
         if (qName.equalsIgnoreCase("article") ||
             qName.equalsIgnoreCase("inproceedings") ||
-            qName.equalsIgnoreCase( "proceedings") ||
-            qName.equalsIgnoreCase( "book")  ||
+            qName.equalsIgnoreCase("proceedings") ||
+            qName.equalsIgnoreCase("book")  ||
             qName.equalsIgnoreCase("incollection") ||
             qName.equalsIgnoreCase("phdthesis") ||
             qName.equalsIgnoreCase("mastersthesis") ||
             qName.equalsIgnoreCase("www"))
         {
-            // create a new instance of employee
             tempEmp = new Article();
             tempEmp.setType(qName);
             tempEmp.setKey(attributes.getValue("key"));

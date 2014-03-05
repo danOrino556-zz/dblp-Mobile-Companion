@@ -42,36 +42,20 @@
                     android:id="@+id/dblplogo"
                     android:src="@drawable/dblp_large"
                     android:scaleType="fitStart"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
                     android:cropToPadding="false"
-                    android:padding="15dp" />
+                    android:padding="15dp"
+                    android:layout_centerVertical="true" />
 
 
                 <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:id="@+id/infoButton"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@android:drawable/ic_menu_info_details"
-                    android:background="#505b62" />
-
-                <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:id="@+id/settingsButton"
-                    android:layout_toLeftOf="@+id/infoButton"
-                    android:src="@android:drawable/ic_menu_preferences"
-                    android:background="#505b62" />
-
-                <ImageButton
-                    android:layout_width="45dp"
+                    android:layout_width="50dp"
                     android:layout_height="45dp"
                     android:id="@+id/backButtonDirectory"
-                    android:layout_toLeftOf="@+id/settingsButton"
-                    android:src="@drawable/abc_ic_ab_back_holo_dark"
-                    android:background="#505b62" />
+                    android:src="@drawable/abc_ic_clear_search_api_holo_light"
+                    android:background="#ffffff"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true" />
 
             </RelativeLayout>
 

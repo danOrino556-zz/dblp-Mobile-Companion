@@ -39,6 +39,7 @@ public class Article
         return getTitle();
     }
 
+    //Not all articles will fill all fields.....but thats OK
     public String listAttributes()
     {
         StringBuffer attributesString = new StringBuffer();
@@ -101,186 +102,161 @@ public class Article
         return attributesString.toString();
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public ArrayList<String> getAuthors() {
-        return authors;
-    }
+    //Setters for Collections
 
     public void addAuthor(String newAuthor)
     {
         authors.add(newAuthor);
     }
 
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getJournal() {
-        return journal;
-    }
-    public void setJournal(String journal) {
-        this.journal = journal;
-    }
-
-    public String getVolume() {
-        return volume;
-    }
-    public void setVolume(String volume) {
-        this.volume = volume;
-    }
-
-    public String getYear() {
-        return year;
-    }
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getPages() {
-        return pages;
-    }
-    public void setPages(String pages) {
-        this.pages = pages;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getEe() {
-        return ee;
-    }
-    public void setEe(String ee) {
-        this.ee = ee;
-    }
-
-
-    public ArrayList<String> getEditors()
-    {
-        return editors;
-    }
     public void addEditor(String newEditor)
     {
         editors.add(newEditor);
     }
 
+    //Getters
+    public String getKey() {
+        return key;
+    }
+    public ArrayList<String> getAuthors() {
+        return authors;
+    }
+    public ArrayList<String> getEditors()
+    {
+        return editors;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public String getJournal() {
+        return journal;
+    }
+    public String getVolume() {
+        return volume;
+    }
+    public String getYear() {
+        return year;
+    }
+    public String getPages() {
+        return pages;
+    }
+    public String getUrl() {
+        return url;
+    }
+    public String getEe() {
+        return ee;
+    }
     public String getBookTitle() {
         return bookTitle;
     }
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
+    public String getMdate() {
+        return mdate;
     }
-
     public String getNumber() {
         return number;
     }
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public String getMonth() {
         return month;
     }
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
     public String getAddress() {
         return address;
     }
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getCdRom() {
         return cdRom;
     }
-    public void setCdRom(String cdRom) {
-        this.cdRom = cdRom;
-    }
-
     public String getCite() {
         return cite;
     }
-    public void setCite(String cite) {
-        this.cite = cite;
-    }
-
     public String getPublisher() {
         return publisher;
     }
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
     public String getNote() {
         return note;
     }
-    public void setNote(String note) {
-        this.note = note;
-    }
-
     public String getCrossRef() {
         return crossRef;
     }
-
-    public void setCrossRef(String crossRef) {
-        this.crossRef = crossRef;
-    }
-
     public String getIsbn() {
         return isbn;
     }
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public String getSeries() {
         return series;
     }
-    public void setSeries(String series) {
-        this.series = series;
-    }
-
     public String getSchool() {
         return school;
     }
-    public void setSchool(String school) {
-        this.school = school;
-    }
-
     public String getType() {
         return type;
     }
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getChapter() {
         return chapter;
     }
 
-    public void setChapter(String chapter) {
-        this.chapter = chapter;
+    //Setters
+    public void setKey(String key) {
+        this.key = key;
     }
-
-    public String getMdate() {
-        return mdate;
+    public void setTitle(String title) {
+        this.title = title;
     }
-
+    public void setJournal(String journal) {
+        this.journal = journal;
+    }
+    public void setVolume(String volume) {
+        this.volume = volume;
+    }
+    public void setYear(String year) {
+        this.year = year;
+    }
+    public void setPages(String pages) {
+        this.pages = pages;
+    }
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    public void setEe(String ee) {
+        this.ee = ee;
+    }
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+    public void setNumber(String number) {
+        this.number = number;
+    }
+    public void setMonth(String month) {
+        this.month = month;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public void setCdRom(String cdRom) {
+        this.cdRom = cdRom;
+    }
+    public void setCite(String cite) {
+        this.cite = cite;
+    }
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+    public void setNote(String note) {
+        this.note = note;
+    }
+    public void setCrossRef(String crossRef) {
+        this.crossRef = crossRef;
+    }
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+    public void setSeries(String series) {
+        this.series = series;
+    }
+    public void setSchool(String school) {
+        this.school = school;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+    public void setChapter(String chapter) {this.chapter = chapter;}
     public void setMdate(String mdate) {
         this.mdate = mdate;
     }
