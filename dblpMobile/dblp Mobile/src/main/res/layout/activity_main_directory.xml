@@ -143,41 +143,7 @@
                     android:textColor="#ffffff"
                     android:typeface="sans" />
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Faceted Search"
-                    android:id="@+id/facetedSearchButton"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@id/authorButton"
 
-                    android:background="@drawable/abc_ab_bottom_transparent_dark_holo"
-                    android:textColor="#ffffff"
-                    android:typeface="sans" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Free Search"
-                    android:id="@+id/freeSearchButton"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@id/facetedSearchButton"
-                    android:background="@drawable/abc_ab_bottom_transparent_dark_holo"
-                    android:textColor="#ffffff" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Complete Search"
-                    android:id="@+id/completeSearchButton"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@id/freeSearchButton"
-
-                    android:background="@drawable/abc_ab_bottom_transparent_dark_holo"
-                    android:textColor="#ffffff" />
 
             </RelativeLayout>
 

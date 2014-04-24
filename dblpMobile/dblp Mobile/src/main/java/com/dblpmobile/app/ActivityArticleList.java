@@ -57,6 +57,7 @@ public class ActivityArticleList extends ActionBarActivity
     ListView articleList;
     ListView authorList;
     ArticleArrayAdapter adapter;
+    AuthorArrayAdapter authorAdapter;
 
     //Accessed by the async tasks while loading the activity
     ProgressBar loadingProgress;

@@ -36,10 +36,9 @@ public class ActivityConferences extends ActionBarActivity
     Integer numberOfEntries = 0;
     ProgressBar loadingProgress;
 
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_conference);

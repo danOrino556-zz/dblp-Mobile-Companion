@@ -3,6 +3,7 @@ package com.dblpmobile.app;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,8 @@ public class ArticleArrayAdapter extends ArrayAdapter <Article>
 {
     private final Context context;
     private final ArrayList<Article> values;
+
+    public LinearLayout authorList;
 
     public ArticleArrayAdapter(Context context, ArrayList<Article> values)
     {
@@ -51,41 +55,122 @@ public class ArticleArrayAdapter extends ArrayAdapter <Article>
 
         if (values.get(i).getAuthors().isEmpty() && !values.get(i).getEditors().isEmpty())
         {
-            for (int j = 0; j < values.get(i).getEditors().size(); j++)
-            {
-                authorText.append(values.get(i).getEditors().get(j));
-                if (j == values.get(i).getEditors().size()-1)
-                {
-                    authorText.append(".");
-                }
-                else
-                {
-                    authorText.append(", ");
-                }
-            }
+            authorText.append("Show Editor List");
         }
         else if (!values.get(i).getAuthors().isEmpty() && values.get(i).getEditors().isEmpty())
         {
-            for (int j = 0; j < values.get(i).getAuthors().size(); j++)
-            {
-                authorText.append(values.get(i).getAuthors().get(j));
-                if (j == values.get(i).getAuthors().size()-1)
-                {
-                    authorText.append(".");
-                }
-                else
-                {
-                    authorText.append(", ");
-                }
-            }
+            authorText.append("Show Author List");
         }
         else if(values.get(i).getAuthors().isEmpty() && values.get(i).getEditors().isEmpty())
         {
             authorText.append("No Authors/Editors Listed");
         }
 
-        TextView authorsText = (TextView)rowView.findViewById(R.id.articleAuthorTextView);
-        authorsText.setText(authorText.toString());
+
+        authorList = (LinearLayout)rowView.findViewById(R.id.articleAuthorRowLayout);
+
+        if(values.get(i).getAuthors().isEmpty() && !values.get(i).getEditors().isEmpty())
+        {
+            for (final String editor : values.get(i).getEditors())
+            {
+                final TextView rowTextView = new TextView(context);
+                rowTextView.setText(editor);
+                rowTextView.setTextSize(18);
+                rowTextView.setPadding(7, 2, 7, 2);
+                rowTextView.setTextColor(Color.parseColor("#ffffff"));
+                rowTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String[] namesSearches = editor.split(" ");
+
+                        //The individual author pages must be all lowercase with the first letter
+                        //capitalized
+                        for (int j = 0; j < namesSearches.length; j++) {
+                            namesSearches[j] = Character.toUpperCase(namesSearches[j].charAt(0)) +
+                                    namesSearches[j].substring(1).toLowerCase();
+                        }
+
+
+                        //final URL must be in this type of format :
+                        //http://dblp.uni-trier.de/pers/hd/r/Robertson:A=_Gerry.html
+
+                        StringBuilder moddedURL = new StringBuilder();
+                        moddedURL.append("http://dblp.uni-trier.de/pers/hd/");
+                        String lastName = namesSearches[namesSearches.length - 1].toLowerCase();
+                        moddedURL.append(lastName.charAt(0) + "/");
+
+                        for (int i = (namesSearches.length - 1); i > 0; i--) {
+                            moddedURL.append(namesSearches[i] + ":");
+                        }
+
+                        moddedURL.append(namesSearches[0]);
+                        moddedURL.append(".html");
+
+                        //Now that we have a properly formatted URL we can transition directly to
+                        //the activity
+                        Intent x = new Intent(context, ActivityArticleList.class);
+                        Bundle extras = new Bundle();
+                        extras.putString("urlSearched", moddedURL.toString());
+                        extras.putString("authorSearched", editor);
+                        x.putExtras(extras);
+                        context.startActivity(x);
+                    }
+                });
+                authorList.addView(rowTextView);
+            }
+        }
+        else if(!values.get(i).getAuthors().isEmpty() && values.get(i).getEditors().isEmpty())
+        {
+            for(final String author : values.get(i).getAuthors())
+            {
+                TextView rowTextView = new TextView(context);
+                rowTextView.setText(author);
+                rowTextView.setTextSize(18);
+                rowTextView.setPadding(7, 2, 7, 2);
+                rowTextView.setTextColor(Color.parseColor("#ffffff"));
+
+                rowTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String[] namesSearches = author.split(" ");
+
+                        //The individual author pages must be all lowercase with the first letter
+                        //capitalized
+                        for (int j = 0; j < namesSearches.length; j++) {
+                            namesSearches[j] = Character.toUpperCase(namesSearches[j].charAt(0)) +
+                                    namesSearches[j].substring(1).toLowerCase();
+                        }
+
+
+                        //final URL must be in this type of format :
+                        //http://dblp.uni-trier.de/pers/hd/r/Robertson:A=_Gerry.html
+
+                        StringBuilder moddedURL = new StringBuilder();
+                        moddedURL.append("http://dblp.uni-trier.de/pers/hd/");
+                        String lastName = namesSearches[namesSearches.length - 1].toLowerCase();
+                        moddedURL.append(lastName.charAt(0) + "/");
+
+                        for (int i = (namesSearches.length - 1); i > 0; i--) {
+                            moddedURL.append(namesSearches[i] + ":");
+                        }
+
+                        moddedURL.append(namesSearches[0]);
+                        moddedURL.append(".html");
+
+                        //Now that we have a properly formatted URL we can transition directly to
+                        //the activity
+                        Intent x = new Intent(context, ActivityArticleList.class);
+                        Bundle extras = new Bundle();
+                        extras.putString("urlSearched", moddedURL.toString());
+                        extras.putString("authorSearched", author);
+                        x.putExtras(extras);
+                        context.startActivity(x);
+                    }
+                });
+                authorList.addView(rowTextView);
+            }
+        }
+
 
         ImageButton viewDocumentButton = (ImageButton)rowView.findViewById(R.id.articleViewDocumentImageButton);
         viewDocumentButton.setOnClickListener(new View.OnClickListener()
@@ -183,7 +268,6 @@ public class ArticleArrayAdapter extends ArrayAdapter <Article>
                 exportDocumentDialog.show();
             }
         });
-
 
 
         ImageButton shareDocumentButton = (ImageButton)rowView.findViewById(R.id.articleShareDocumentImageButton3);

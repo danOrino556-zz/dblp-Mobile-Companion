@@ -5,7 +5,11 @@
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:background="#ffffff">
+    android:paddingBottom="15dp"
+    android:paddingTop="15dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/blue_rounded_corners">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -22,16 +26,16 @@
             android:id="@+id/articleYearTextView"
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
-            android:background="@drawable/grey_rounded_corners"
+            android:background="@drawable/blue_rounded_corners"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"/>
 
     </RelativeLayout>
@@ -58,7 +62,6 @@
             android:text="Article Title"
             android:id="@+id/articleRowTextView"
             android:textColor="#ffffff"
-            android:gravity="center_horizontal"
             android:background="@drawable/blue_rounded_corners"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -67,37 +70,48 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:typeface="sans" />
+            android:typeface="sans"
+            android:textSize="30dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Authors"
-            android:id="@+id/articleAuthorTextView"
-            android:layout_below="@id/articleRowTextView"
-            android:textColor="#ffffff"
-            android:gravity="center_horizontal"
-            android:background="@drawable/blue_rounded_corners"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true" />
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/articleAuthorRowLayout"
+        android:background="@drawable/blue_rounded_corners"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_below="@+id/articleRowTextLayout"
+        android:layout_alignParentLeft="true"
+        android:showDividers="middle"
+        android:gravity="center_horizontal|left"
+        android:layout_centerHorizontal="true">
+
+
+
+    </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/articleCommands"
         android:background="@drawable/grey_rounded_corners"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@+id/articleRowTextLayout"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/articleAuthorRowLayout"
         android:layout_centerHorizontal="true">
 
 

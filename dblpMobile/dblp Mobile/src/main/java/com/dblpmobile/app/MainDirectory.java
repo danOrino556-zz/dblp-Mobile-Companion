@@ -151,34 +151,6 @@ public class MainDirectory extends ActionBarActivity
         });
 
 
-        final Button facetedSearchButton = (Button)findViewById(R.id.facetedSearchButton);
-        facetedSearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                facetedSearchButton.setText("Faceted Search is Currently not Available");
-            }
-        });
-
-        final Button freeSearchButton = (Button)findViewById(R.id.freeSearchButton);
-        freeSearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                freeSearchButton.setText("Free Search is Currently not Implemented");
-
-            }
-        });
-
-        final Button completeSearchButton = (Button)findViewById(R.id.completeSearchButton);
-        completeSearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                completeSearchButton.setText("Complete Search is Currently not Implemented");
-            }
-        });
-
         final RelativeLayout bibliopgraphiesLayout = (RelativeLayout)findViewById(R.id.bibliographiesMainLayout);
         final ImageButton collapseBiblographiesButton = (ImageButton)findViewById(R.id.collapseBibliographyButton);
         collapseBiblographiesButton.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +183,8 @@ public class MainDirectory extends ActionBarActivity
         });
 
         final Button conferencesSearchButton = (Button)findViewById(R.id.conferencesButton);
-        conferencesSearchButton.setOnClickListener(new View.OnClickListener() {
+        conferencesSearchButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: mf">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/mf.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
